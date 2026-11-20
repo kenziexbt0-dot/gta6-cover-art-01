@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Cover Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff2e88'/%3E%3Ctext x='16' y='23' font-size='20' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls">
+    <h1>Neon Cover Studio</h1>
+    <p class="tagline">Your photos, turned into a multi-panel poster-style cover. Pick a layout, a colour grade and a caption, then export a PNG.</p>
+
+    <label class="field">Photos
+      <span class="hint">Upload your own, or use the samples. Click a thumbnail to fill every panel with that photo.</span>
+      <input id="photo" type="file" accept="image/*" multiple>
+    </label>
+    <div id="photo-list" class="thumbs" aria-label="Photos"></div>
+
+    <fieldset>
+      <legend>Layout</legend>
+      <div class="btn-row">
+        <button type="button" data-layout="hero" class="active">Hero</button>
+        <button type="button" data-layout="triptych">Triptych</button>
+        <button type="button" data-layout="quad">Quad</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Colour grade</legend>
+      <div class="btn-row">
+        <button type="button" data-grade="sunset" class="active">Sunset</button>
+        <button type="button" data-grade="neon">Neon</button>
+        <button type="button" data-grade="noir">Noir</button>
+        <button type="button" data-grade="palm">Palm</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Export size</legend>
+      <div class="btn-row">
+        <button type="button" data-size="1080x1080" class="active">1080 &times; 1080</button>
+        <button type="button" data-size="1080x1350">1080 &times; 1350</button>
+        <button type="button" data-size="1920x1080">1920 &times; 1080</button>
+      </div>
+    </fieldset>
+
+    <button id="export" type="button" class="export">Export PNG</button>
+    <p id="status" role="status"></p>
+
+    <label class="field">Caption
+      <input id="caption" type="text" maxlength="40" value="Sunset Heist">
+    </label>
+    <label class="field">Caption size
+      <input id="caption-size" type="range" min="0.5" max="1.5" step="0.05" value="1">
+    </label>
+    <label class="field">Caption position
+      <input id="caption-pos" type="range" min="0" max="1" step="0.05" value="0.85">
+    </label>
+
+    <p class="fine">Photos never leave your machine. The display face is Bebas Neue, vendored under the SIL Open Font License.</p>
+  </section>
+
+  <section class="stage">
+    <div class="canvas-wrap">
+      <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+    </div>
+    <p class="hint">Click a panel to select it &middot; drag it to pan &middot; scroll to zoom.</p>
+    <div class="panel-tools">
+      <label>Selected panel&rsquo;s photo
+        <select id="panel-photo"></select>
+      </label>
+      <label>Zoom <span id="zoom-value">1.00x</span>
+        <input id="zoom" type="range" min="1" max="4" step="0.05" value="1">
+      </label>
+      <button id="fill-all" type="button">Fill all panels with this photo</button>
+    </div>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
